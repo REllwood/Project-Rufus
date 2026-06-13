@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project-rufus"
+version = "0.2.0"
+description = "Project Rufus: music-reactive AI landscape video generator"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dependencies = [
+    "diffusers>=0.28.0",
+    "transformers>=4.40.0",
+    "accelerate>=0.30.0",
+    "torch>=2.0.0",
+    "librosa>=0.10.0",
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "Pillow>=10.0.0",
+    "tqdm>=4.65.0",
+    "soundfile>=0.12.0",
+    "imageio-ffmpeg>=0.4.9",
+]
+
+[project.optional-dependencies]
+dashboard = ["rich>=13.0.0"]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+rufus = "rufus.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["rufus*"]

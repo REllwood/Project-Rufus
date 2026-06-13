@@ -1,0 +1,71 @@
+# Virtual environments (regenerated from requirements.txt / pyproject.toml)
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+*.egg
+pip-wheel-metadata/
+
+# Test and coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+# Hugging Face / model caches, if ever placed inside the project
+.cache/
+hf_cache/
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*~
+
+# -------------------------------------------------------------------
+# Rufus generated output
+#
+# Rendered frames, videos and downloaded or generated demo media are
+# all regenerable and should not be committed. The curated showcase
+# GIFs live in assets/ and ARE tracked (they match none of the rules
+# below, and the negation at the end protects them either way).
+# -------------------------------------------------------------------
+
+# Frame directories (anything ending in _frames)
+*_frames/
+
+# Rendered videos and audio at the project root
+*.mp4
+*.wav
+demo_audio.mp3
+
+# Generated test photos
+photo_fox.png
+photo_owl.png
+photo_lion.png
+
+# Default example output paths
+output.mp4
+memories.mp4
+loop.mp4
+
+# Always keep the curated showcase assets
+!assets/
+!assets/**
