@@ -300,7 +300,7 @@ This is general information, not legal advice.
 
 Project Rufus will cheerfully render whatever you point it at and ask no questions, so a few sensible boundaries:
 
-- **The safety checker is switched off.** Nothing edgy going on here. In a feedback loop, one frame the checker takes a dislike to gets painted black, and then every frame after it inherits that black, and your lovely 30 second journey quietly collapses into a void. So it had to go. The catch is that nothing is filtering the output now except you, so behave yourself.
-- **Garbage in, garbage out.** Feed it images you actually have the rights to. Don't use it to puppet a real person's face, and don't pass the results off as some living artist's work. That is both poor form and exactly the sort of thing lawyers get cheerful about.
-- **Sort out your music.** The demo borrows "Winter" by Zoe Blade under Creative Commons BY-NC-ND. That "no derivatives" bit means a music video built on the track lives in a grey area: grand for a muck around on your own machine, not something to post. For anything you share, bring your own track or one that is properly licensed.
-- **The first run is hungry.** It pulls down several gigabytes of model weights, so you will want a decent internet connection and a cuppa while you wait.
+- **Safety checker is disabled.** The iterative generation loop breaks if the safety checker rejects even a single frame — downstream frames inherit the black output and the entire sequence collapses. Disabling it was a practical necessity, but it means there is no content filter on the output. Use responsibly.
+- **Respect image rights.** Only use source images you have the rights to. Do not use this tool to manipulate real people's likenesses or to replicate a living artist's style and pass it off as their work.
+- **License your audio.** The demo uses "Winter" by Zoe Blade under Creative Commons BY-NC-ND. The "no derivatives" clause makes any derivative music video unsuitable for public distribution. For anything you intend to share, use your own audio or a track with an appropriate licence.
+- **First run downloads models.** Several gigabytes of model weights are fetched on the initial run. A stable internet connection is required.
