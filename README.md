@@ -4,14 +4,9 @@ Project Rufus turns a song and a handful of scenes into a video where the scener
 
 Inspired by the [RUFUS DU SOL "Next To Me" music video](https://www.youtube.com/watch?v=GPXiL6ynVG8) by Osk Studio.
 
-<p align="center">
-  <img src="assets/photo-morph.gif" width="420" alt="A series of photos morphing in time with music and looping back to the start">
-</p>
 
-<p align="center">
-  <img src="assets/animals.gif" width="300" alt="A text prompt journey morphing from a fox to a lion">
-  <img src="assets/loop.gif" width="300" alt="A seamless looping morph">
-</p>
+
+
 
 Three photos (a fox, an owl and a lion) flowing into one another in time with a track and looping back to the start. On the left, a journey rendered from text prompts; on the right, a seamless loop. These are quick low step preview renders kept small on purpose, so full quality output looks sharper than what you see here.
 
@@ -42,12 +37,14 @@ There is also an older **morph** mode, where each frame is rendered on its own f
 
 The device is detected automatically (override with `device=` or `--device`):
 
-| Hardware | Backend | Notes |
-|---|---|---|
-| NVIDIA GPU | `cuda` | fp16, CPU offloading; about 6 GB VRAM for SDXL |
-| Apple Silicon | `mps` (Metal) | fp32 plus attention slicing for reliability; 32 GB unified memory for SDXL |
-| Intel GPU | `xpu` | fp16 |
-| CPU | `cpu` | the fallback for everything else; use an SD 1.5-class model, since SDXL on CPU is minutes per frame |
+
+| Hardware      | Backend       | Notes                                                                                               |
+| ------------- | ------------- | --------------------------------------------------------------------------------------------------- |
+| NVIDIA GPU    | `cuda`        | fp16, CPU offloading; about 6 GB VRAM for SDXL                                                      |
+| Apple Silicon | `mps` (Metal) | fp32 plus attention slicing for reliability; 32 GB unified memory for SDXL                          |
+| Intel GPU     | `xpu`         | fp16                                                                                                |
+| CPU           | `cpu`         | the fallback for everything else; use an SD 1.5-class model, since SDXL on CPU is minutes per frame |
+
 
 Both SDXL-class and SD 1.5-class checkpoints work (loaded through the diffusers `AutoPipeline`). For CPU or a low-VRAM GPU, pick a lighter model:
 
@@ -125,27 +122,29 @@ config = GenerationConfig.preview(fast_mode="lightning")
 
 ### Key parameters
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `model` | `stabilityai/stable-diffusion-xl-base-1.0` | Hugging Face model ID |
-| `device` | auto-detect | `cuda`, `mps`, `xpu` or `cpu` |
-| `mode` | `flow` | `flow` (coherent feedback loop) or `morph` (legacy) |
-| `fast_mode` | `None` | `"lightning"` or `"lcm"`, for 4 to 8 step distilled inference |
-| `width` / `height` | 768 | Output resolution |
-| `fps` | 12 | Frames per second |
-| `flow_strength_min` / `max` | 0.30 / 0.55 | img2img denoise range; audio energy maps it from calm to peak. Set at `morph_rate_reference_fps` (12) and scaled to the frame rate, so a higher fps gives a smaller change per frame at the same morph speed per second |
-| `temporal_noise` | `fixed` | `fixed` reuses one noise pattern across frames (stable, no shimmer); `varying` redraws it per frame (livelier, but it boils) |
-| `keyframe_hold` | 0.35 | Fraction of each span the scene rests before it starts morphing |
-| `flow_velocity_influence` | 0.6 | Extra denoise during fast prompt transitions so scenes do not lag the prompt |
-| `sharpen_amount` | 0.3 | Per-frame unsharp mask that counters feedback-loop softening |
-| `flow_zoom_min` / `max` | 1.002 / 1.012 | Per-frame zoom factor range (compounds into motion) |
-| `enable_depth_warp` | False | Depth-aware parallax camera (downloads a small depth model) |
-| `color_coherence` | True | Stops the feedback loop drifting in colour over time |
-| `smooth_fps` | None | Motion-interpolate the final video to this frame rate with ffmpeg |
-| `onset_sensitivity` | 1.0 | How much audio onsets speed up transitions |
-| `beat_transition_boost` | 1.5 | Extra transition speed near beats |
-| `beat_zoom_pulse` | 0.006 | A small zoom kick on each beat |
-| `resume` | True | Continue an interrupted render from the last saved frame |
+
+| Parameter                   | Default                                    | Description                                                                                                                                                                                                             |
+| --------------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `model`                     | `stabilityai/stable-diffusion-xl-base-1.0` | Hugging Face model ID                                                                                                                                                                                                   |
+| `device`                    | auto-detect                                | `cuda`, `mps`, `xpu` or `cpu`                                                                                                                                                                                           |
+| `mode`                      | `flow`                                     | `flow` (coherent feedback loop) or `morph` (legacy)                                                                                                                                                                     |
+| `fast_mode`                 | `None`                                     | `"lightning"` or `"lcm"`, for 4 to 8 step distilled inference                                                                                                                                                           |
+| `width` / `height`          | 768                                        | Output resolution                                                                                                                                                                                                       |
+| `fps`                       | 12                                         | Frames per second                                                                                                                                                                                                       |
+| `flow_strength_min` / `max` | 0.30 / 0.55                                | img2img denoise range; audio energy maps it from calm to peak. Set at `morph_rate_reference_fps` (12) and scaled to the frame rate, so a higher fps gives a smaller change per frame at the same morph speed per second |
+| `temporal_noise`            | `fixed`                                    | `fixed` reuses one noise pattern across frames (stable, no shimmer); `varying` redraws it per frame (livelier, but it boils)                                                                                            |
+| `keyframe_hold`             | 0.35                                       | Fraction of each span the scene rests before it starts morphing                                                                                                                                                         |
+| `flow_velocity_influence`   | 0.6                                        | Extra denoise during fast prompt transitions so scenes do not lag the prompt                                                                                                                                            |
+| `sharpen_amount`            | 0.3                                        | Per-frame unsharp mask that counters feedback-loop softening                                                                                                                                                            |
+| `flow_zoom_min` / `max`     | 1.002 / 1.012                              | Per-frame zoom factor range (compounds into motion)                                                                                                                                                                     |
+| `enable_depth_warp`         | False                                      | Depth-aware parallax camera (downloads a small depth model)                                                                                                                                                             |
+| `color_coherence`           | True                                       | Stops the feedback loop drifting in colour over time                                                                                                                                                                    |
+| `smooth_fps`                | None                                       | Motion-interpolate the final video to this frame rate with ffmpeg                                                                                                                                                       |
+| `onset_sensitivity`         | 1.0                                        | How much audio onsets speed up transitions                                                                                                                                                                              |
+| `beat_transition_boost`     | 1.5                                        | Extra transition speed near beats                                                                                                                                                                                       |
+| `beat_zoom_pulse`           | 0.006                                      | A small zoom kick on each beat                                                                                                                                                                                          |
+| `resume`                    | True                                       | Continue an interrupted render from the last saved frame                                                                                                                                                                |
+
 
 ## Beyond landscapes
 
@@ -296,7 +295,7 @@ Project Rufus does not bundle any model weights. It downloads them at runtime fr
 
 This is general information, not legal advice.
 
-## Responsible use (don't be a goose)
+## Responsible use
 
 Project Rufus will cheerfully render whatever you point it at and ask no questions, so a few sensible boundaries:
 
@@ -304,3 +303,4 @@ Project Rufus will cheerfully render whatever you point it at and ask no questio
 - **Respect image rights.** Only use source images you have the rights to. Do not use this tool to manipulate real people's likenesses or to replicate a living artist's style and pass it off as their work.
 - **License your audio.** The demo uses "Winter" by Zoe Blade under Creative Commons BY-NC-ND. The "no derivatives" clause makes any derivative music video unsuitable for public distribution. For anything you intend to share, use your own audio or a track with an appropriate licence.
 - **First run downloads models.** Several gigabytes of model weights are fetched on the initial run. A stable internet connection is required.
+
