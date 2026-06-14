@@ -4,9 +4,9 @@ Project Rufus turns a song and a handful of scenes into a video where the scener
 
 Inspired by the [RUFUS DU SOL "Next To Me" music video](https://www.youtube.com/watch?v=GPXiL6ynVG8) by Osk Studio.
 
+![A series of photos morphing in time with music and looping back to the start](assets/photo-morph.gif)
 
-
-
+![A text prompt journey morphing from a fox to a lion](assets/animals.gif) ![A seamless looping morph](assets/loop.gif)
 
 Three photos (a fox, an owl and a lion) flowing into one another in time with a track and looping back to the start. On the left, a journey rendered from text prompts; on the right, a seamless loop. These are quick low step preview renders kept small on purpose, so full quality output looks sharper than what you see here.
 
